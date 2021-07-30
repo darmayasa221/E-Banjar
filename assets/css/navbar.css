@@ -1,0 +1,38 @@
+.navbar_container {
+  background: darkgrey;
+  height: 8vh;
+  display: flex;
+  justify-content: flex-end;
+  box-shadow: 0 0 4px 0 rgb(0, 0, 0);
+}
+
+.navbar_content {
+  margin: auto 20px;
+}
+
+.navbar_content a {
+  text-decoration: none;
+  color: black;
+  font-size: 25px;
+}
+
+.navbar_content a:hover {
+  color: black;
+  transform: translateY(100px);
+  transition: 0.2s;
+  padding-bottom: 5px;
+  border-bottom: 2px black solid;
+}
+
+.search_container {
+  overflow: hidden;
+  display: flex;
+  height: 84vh;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.search_content,
+.search_input {
+  margin: auto;
+}
