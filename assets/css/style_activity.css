@@ -1,0 +1,23 @@
+.activity_wraper {
+  display: flex;
+  width: 900px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.activity_container {
+  display: flex;
+  height: 47vh;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  overflow: scroll;
+  border-top: black 2px solid;
+}
+
+.activity_card {
+  margin-top: 10px;
+  height: 200px;
+  width: 200px;
+  box-shadow: 0 0 4px 0 rgb(255, 255, 255);
+  background-color: blue;
+}
