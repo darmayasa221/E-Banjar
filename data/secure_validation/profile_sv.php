@@ -38,7 +38,7 @@
             </a>
           </li>
           <li class="duration-300 bg-blue-500 hover:bg-green-500 rounded-md text-white text-m">
-            <a href="activity_sv.php">
+            <a href="activitys_sv.php">
               Kegiatan Masyarakat 
             </a>
           </li>
