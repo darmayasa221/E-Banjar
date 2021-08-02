@@ -1,0 +1,9 @@
+.about-peoples {
+  width: 900px;
+  max-width: 1000px;
+  margin-top: 20px;
+}
+
+.about-peoples tbody {
+  max-height: 400px;
+}

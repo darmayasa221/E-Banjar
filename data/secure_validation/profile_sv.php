@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="../../assets/css/style_home.css">
   <link rel="stylesheet" href="../../assets/css/style_profile.css">
   <link rel="stylesheet" href="../../assets/css/tailwind.css">
-  <title>Document</title>
+  <title>E-Banjar</title>
 </head>
 <body>
   <nav class="navbar_container">
