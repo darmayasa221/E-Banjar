@@ -14,7 +14,8 @@
   align-items: center;
 }
 
-.detail_profile input {
+.detail_profile input,
+.detail_profile textarea {
   width: 80%;
 }
 
