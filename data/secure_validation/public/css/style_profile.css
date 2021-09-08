@@ -1,0 +1,24 @@
+.about_profile {
+  display: flex;
+  flex-direction: column;
+}
+
+.about_form {
+  width: 84vh;
+}
+
+.detail_profile {
+  margin: 10px 0 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail_profile input,
+.detail_profile textarea {
+  width: 80%;
+}
+
+.detail_profile label {
+  font-weight: bold;
+}

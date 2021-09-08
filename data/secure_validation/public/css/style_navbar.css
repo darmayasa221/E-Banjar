@@ -1,0 +1,40 @@
+.navbar_container {
+  overflow: hidden;
+  background: rgba(59, 131, 246, 0.815);
+  height: 60px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  box-shadow: 0 0 4px 0 rgb(0, 0, 0);
+}
+
+.navbar_logout {
+  margin: auto 50px;
+}
+
+.navbar_logout a {
+  text-decoration: none;
+  color: rgba(15, 15, 15, 0.856);
+  transition: 0.2s;
+  font-size: 25px;
+}
+
+.navbar_logout a:hover {
+  color: black;
+  transform: translateY(100px);
+  transition: 0.2s;
+  padding-bottom: 5px;
+  border-bottom: 2px black solid;
+}
+
+.navbar_profile {
+  display: flex;
+  margin: auto 50px;
+  align-items: center;
+  font-size: 25px;
+}
+
+.profile_img {
+  border-radius: 50px;
+  overflow: hidden;
+}
