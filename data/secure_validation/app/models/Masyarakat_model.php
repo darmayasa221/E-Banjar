@@ -1,6 +1,6 @@
 <?php
 
-class User_masyarakat_model
+class Masyarakat_model
 {
   private $tabel = 'tb_data_masyarakat';
   private $db;
