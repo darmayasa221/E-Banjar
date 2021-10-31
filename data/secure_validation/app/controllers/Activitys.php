@@ -94,4 +94,12 @@ class Activitys extends Controller
       header('Location: ' . BASEURL . '/activitys/adminActivity');
     };
   }
+  public function search()
+  {
+    $this->data = $this->model('Kegiatan_model')->searchKegiatan();
+    $this->view('templates/headers/access/header-access');
+    $this->view('templates/menu/side-left-menu-user');
+    $this->view('activitys/index', $this->data);
+    $this->view('templates/footers/access/footer-access');
+  }
 }

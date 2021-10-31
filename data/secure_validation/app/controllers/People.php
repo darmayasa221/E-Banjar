@@ -73,4 +73,12 @@ class People extends Controller
       header('Location: ' . BASEURL . '/people/peoples');
     };
   }
+  public function search()
+  {
+    $this->data = $this->model('Masyarakat_model')->searchMasyarakat();
+    $this->view('templates/headers/access/header-access');
+    $this->view('templates/menu/side-left-menu-user');
+    $this->view('people/index', $this->data);
+    $this->view('templates/footers/access/footer-access');
+  }
 }

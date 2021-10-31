@@ -57,4 +57,12 @@
 
       return $this->db->rowCount();
     }
+    public function searchKegiatan()
+    {
+      $keyword = $_POST['keyword'];
+      $query = "SELECT * FROM {$this->tabel} WHERE nama_kegiatan LIKE :keyword";
+      $this->db->query($query);
+      $this->db->bind('keyword', "%$keyword%");
+      return $this->db->resultSet();
+    }
   }
