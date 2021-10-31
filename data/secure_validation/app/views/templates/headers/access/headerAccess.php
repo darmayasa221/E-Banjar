@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,6 +15,7 @@
   <link rel="stylesheet" href="<?= BASEURL; ?>/css/tailwind.css">
   <title>E-Banjar</title>
 </head>
+
 <body>
   <nav class="navbar_container">
     <div class="navbar_logout font-bold">
@@ -23,7 +25,7 @@
     </div>
     <div class="navbar_profile">
       <div class="profile_img">
-        <img src="http://placehold.it/50x50" alt="your profile"/>
+        <img src="http://placehold.it/50x50" alt="your profile" />
       </div>
       <div class="ml-7 font-bold">
         <h3>

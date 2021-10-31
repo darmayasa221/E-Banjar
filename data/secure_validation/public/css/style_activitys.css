@@ -24,3 +24,7 @@
   box-shadow: 0 0 4px 0 rgb(255, 255, 255);
   background-color: white;
 }
+.activity_card img {
+  width: 200px;
+  height: 150px;
+}

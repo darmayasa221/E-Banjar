@@ -1,5 +1,6 @@
-<?php 
-class Login extends Controller { 
+<?php
+class Login extends Controller
+{
   public function index()
   {
     $this->view('templates/headers/header');
@@ -7,5 +8,3 @@ class Login extends Controller {
     $this->view('templates/footers/footer');
   }
 }
-
-?>

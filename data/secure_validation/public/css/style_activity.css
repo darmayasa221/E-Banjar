@@ -5,6 +5,11 @@
   margin-bottom: 10px;
 }
 
+.activity_img img {
+  height: 250px;
+  width: 500px;
+}
+
 .activity_description h3 {
   font-size: 25px;
   font-weight: bold;
