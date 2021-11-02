@@ -2,7 +2,7 @@
   <div class="search_content ">
     <h1 class="text-5xl font-bold">Wellcome To E-Banjar</h1>
     <h2 class="text-3xl">Search Any What You Want...</h2>
-    <form class="flex w-full justify-center flex-col" action="<?= BASEURL ?>/activitys/search" method="POST">
+    <form class="flex w-full justify-center flex-col" action="<?= BASEURL ?>/activitys/index/search" method="POST">
       <span>
         <input class="w-5/6 p-2 border border-gray-300 rounded mt-2 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1" placeholder="Search Here..." name="keyword" id="keyword" autocomplete="off" />
         <button class=" p-2 border border-gray-300 duration-300 bg-blue-500 hover:bg-green-500 rounded-md text-white text-m" type="submit" id="search">Search</button>

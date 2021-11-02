@@ -8,6 +8,11 @@ class Masyarakat_model
   {
     $this->db = new Databases;
   }
+  public function access()
+  {
+    $this->db->query("SELECT * FROM user_access");
+    return $this->db->resultSet();
+  }
   public function getAllUser()
   {
     $this->db->query("SELECT * FROM {$this->tabel}");
@@ -25,7 +30,7 @@ class Masyarakat_model
   public function addMasyarakat($data)
   {
     $query = "INSERT INTO {$this->tabel} VALUES 
-      (:ktp, :nama, :alamat, :kelamin, :tgl_lahir, :no_hp, :email, :avatar)";
+      (:ktp, :nama, :alamat, :kelamin, :tgl_lahir, :no_hp, :email, :avatar :role_id :date_created)";
     $date = date("y-m-d", strtotime($data['tgl_lahir']));
     $generet_ktp = gmp_init($data['ktp']);
     $generet_no_hp = gmp_init($data['no_hp']);
@@ -40,6 +45,8 @@ class Masyarakat_model
     $this->db->bind('no_hp', $no_hp);
     $this->db->bind('email', $data['email']);
     $this->db->bind('avatar', $data['avatar']);
+    $this->db->bind('role_id', $data['role_id']);
+    $this->db->bind('date_created', $data['date_created']);
 
     $this->db->execute();
     return $this->db->rowCount();
@@ -52,7 +59,7 @@ class Masyarakat_model
     } else {
       $file_foto = $data['avatar_before'];
     }
-    $query = "UPDATE {$this->tabel} SET nama = :nama, alamat = :alamat, kelamin = :kelamin, tgl_lahir = :tgl_lahir, no_hp = :no_hp, email = :email, avatar = :avatar WHERE ktp = :ktp";
+    $query = "UPDATE {$this->tabel} SET nama = :nama, alamat = :alamat, kelamin = :kelamin, tgl_lahir = :tgl_lahir, no_hp = :no_hp, email = :email, avatar = :avatar, role_id = :role_id, date_created = :date_created WHERE ktp = :ktp";
     $date = date("y-m-d", strtotime($data['tgl_lahir']));
     $generet_ktp = gmp_init($data['ktp']);
     $generet_no_hp = gmp_init($data['no_hp']);
@@ -66,6 +73,8 @@ class Masyarakat_model
     $this->db->bind('no_hp', $no_hp);
     $this->db->bind('email', $data['email']);
     $this->db->bind('avatar', $file_foto);
+    $this->db->bind('role_id', $data['role_id']);
+    $this->db->bind('date_created', $data['date_created']);
     $this->db->bind('ktp', $ktp);
 
     $this->db->execute();

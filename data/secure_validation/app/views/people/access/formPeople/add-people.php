@@ -1,10 +1,11 @@
 <div class="right-side">
   <div class="right-side-conten ">
-    <form class="about_profile" action=" <?= BASEURL ?>/people/add" method="POST" enctype="multipart/form-data">
+    <form class="about_profile" action=" <?= BASEURL ?>/people/toDo/add" method="POST" enctype="multipart/form-data">
       <h1 class="text-5xl font-bold"><?= $headline ?></h1>
       <br />
       <div class="about_form">
         <div class="flex justify-between items-center border-b-2 pb-3">
+          <input type="hidden" name="date_created" value="<?= $data['date_created'] ?>">
           <input type="file" name="avatar">
         </div>
         <div class="detail_profile">
@@ -36,6 +37,13 @@
           <select class=" justify-self-start p-2 border border-gray-300 rounded mt-1 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1" name="kelamin" id="kelamin">
             <option value="L">Laki-Laki</option>
             <option value="P">Perempuan</option>
+          </select>
+        </div>
+        <div class="detail_profile">
+          <label for="role_id">Jenis Kelamin</label>
+          <select class=" justify-self-start p-2 border border-gray-300 rounded mt-1 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1" name="kelamin" id="kelamin">
+            <option value="1">Admin</option>
+            <option value="2">User</option>
           </select>
         </div>
       </div>

@@ -8,7 +8,6 @@ class Databases
   private $db_name = DB_NAME;
   private $dbh;
   private $stmt;
-
   public function __construct()
   {
     $dsn = "mysql:host={$this->host};dbname={$this->db_name}";

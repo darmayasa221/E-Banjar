@@ -5,6 +5,30 @@ class Validation
   private $newData = [];
   private $regex = '';
 
+  public function validationLogin($user = null, $users = null,)
+  {
+    $error = array('username' => '', 'password' => '');
+    foreach ($users as $value_users) {
+      if ($user['email'] == '' &&  $user['password'] == '') {
+        $error['password'] = "Password Kosong !";
+        $error['username'] = "Username Kosong !";
+        return $error;
+      } else if ($user['email'] != $value_users['email']) {
+        $error['username'] = "Username Tidak Terdaftar !";
+        return $error;
+      }
+      if ($user['password'] != $value_users['ktp']) {
+        $error['password'] =  "Sassword Salah !";
+        return $error;
+      }
+      if ($user['email'] == $value_users['email'] && $user['password'] == $value_users['ktp']) {
+        $valid = array('user' => $value_users, 'role_id' => (int)$value_users['role_id']);
+        return $valid;
+      } else {
+        return false;
+      }
+    }
+  }
   private function validationInput($array)
   {
     foreach ($array as $key =>  $value) {

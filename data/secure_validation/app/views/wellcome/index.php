@@ -1,6 +1,6 @@
   <nav class="navbar_container">
     <div class="navbar_content font-bold">
-      <a href="<?= BASEURL ?>/home">
+      <a href="<?= BASEURL ?>/login">
         Login
       </a>
     </div>

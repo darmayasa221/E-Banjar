@@ -1,6 +1,6 @@
 <div class="right-side">
   <div class="right-side-conten ">
-    <form class="about_profile" action="<?= BASEURL ?>/activitys/add" method="POST" enctype="multipart/form-data">
+    <form class="about_profile" action="<?= BASEURL ?>/activitys/toDo/add" method="POST" enctype="multipart/form-data">
       <h1 class="text-5xl font-bold"><?= $headline ?></h1>
       <br />
       <div class="about_form">
@@ -24,7 +24,7 @@
         <button class="p-2 btn_register duration-500 w-full py-2 px-4 bg-blue-500 hover:bg-green-500 rounded-md text-white text-m" type="submit">Save?</button>
       </div>
       <div class="mt-3">
-        <a class="text-sm font-black text-gray-600 block text-center" href="<?= BASEURL ?>/activitys/activitys">Cancel</a>
+        <a class="text-sm font-black text-gray-600 block text-center" href="<?= BASEURL ?>/activitys/index">Cancel</a>
       </div>
     </form>
   </div>

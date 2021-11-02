@@ -21,8 +21,8 @@
             <td class="p-4 text-center w-1/6 border-r-2 border-fuchsia-600"><?= $value['waktu_kegiatan'] ?></td>
             <td class=" p-4 text-center w-1/8">
               <div class="flex flex-col items-center justify-center h-full">
-                <button class=" m-2 w-full duration-300 bg-blue-500 hover:bg-green-500 rounded-md text-white text-m" onclick="location.href='<?= BASEURL ?>/activitys/form/<?= $value['nama_kegiatan'] ?>/<?= $value['id'] ?>';">Edit</button>
-                <button class=" m-2 w-full duration-300 bg-blue-500 hover:bg-red-500 rounded-md text-white text-m" onclick="location.href='<?= BASEURL ?>/activitys/remove/<?= $value['id'] ?>';">Delete</button>
+                <button class=" m-2 w-full duration-300 bg-blue-500 hover:bg-green-500 rounded-md text-white text-m" onclick="location.href='<?= BASEURL ?>/activitys/activity/<?= $value['nama_kegiatan'] ?>/<?= $value['id'] ?>';">Edit</button>
+                <button class=" m-2 w-full duration-300 bg-blue-500 hover:bg-red-500 rounded-md text-white text-m" onclick="location.href='<?= BASEURL ?>/activitys/toDo/remove/<?= $value['id'] ?>';">Delete</button>
               </div>
             </td>
           </tr>
