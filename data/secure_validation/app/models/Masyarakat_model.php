@@ -29,8 +29,9 @@ class Masyarakat_model
   }
   public function addMasyarakat($data)
   {
+    var_dump($data);
     $query = "INSERT INTO {$this->tabel} VALUES 
-      (:ktp, :nama, :alamat, :kelamin, :tgl_lahir, :no_hp, :email, :avatar :role_id :date_created)";
+      (:ktp, :nama, :alamat, :kelamin, :tgl_lahir, :no_hp, :email, :avatar, :role_id, :date_created)";
     $date = date("y-m-d", strtotime($data['tgl_lahir']));
     $generet_ktp = gmp_init($data['ktp']);
     $generet_no_hp = gmp_init($data['no_hp']);

@@ -1,50 +1,40 @@
 <div class="right-side">
-  <div class="right-side-conten ">
-    <form class="about_profile" action=" <?= BASEURL ?>/people/toDo/add" method="POST" enctype="multipart/form-data">
+  <div class="conten justify-center">
+    <form class="flex flex-col items-center" action=" <?= BASEURL ?>/people/toDo/add" method="POST" enctype="multipart/form-data">
       <h1 class="text-5xl font-bold"><?= $headline ?></h1>
       <br />
-      <div class="about_form">
-        <div class="flex justify-between items-center border-b-2 pb-3">
+      <div class="flex flex-col w-1/2">
+        <div class="border-b-2 pb-3">
           <input type="hidden" name="date_created" value="<?= $data['date_created'] ?>">
           <input type="file" name="avatar">
         </div>
-        <div class="detail_profile">
-          <label for="nama">Nama</label>
-          <input class="p-2 border border-gray-300 rounded mt-1 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1" name="nama" type="text" value="I Made Darma Yasa">
-        </div>
-        <div class="detail_profile">
-          <label for="ktp">NIK</label>
-          <input class="p-2 border border-gray-300 rounded mt-1 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1" name="ktp" type="number" value="1122334455667788">
-        </div>
-        <div class="detail_profile">
-          <label for="alamat">Alamat</label>
-          <input class="p-2 border border-gray-300 rounded mt-1 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1" name="alamat" type="text" value="denpasar, renon no 10">
-        </div>
-        <div class="detail_profile">
-          <label for="no_hp">No Hp</label>
-          <input class="p-2 border border-gray-300 rounded mt-1 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1" name="no_hp" type="number" value="085111222333">
-        </div>
-        <div class="detail_profile">
-          <label for="email">Email</label>
-          <input class="p-2 border border-gray-300 rounded mt-1 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1" name="email" type="text" value="denpasar, renon no 10">
-        </div>
-        <div class="detail_profile">
-          <label for="tgl_lahir">Tanggal Lahir</label>
-          <input class="p-2 border border-gray-300 rounded mt-1 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1" name="tgl_lahir" type="date" value="denpasar, renon no 10">
-        </div>
-        <div class="detail_profile">
-          <label for="kelamin">Jenis Kelamin</label>
-          <select class=" justify-self-start p-2 border border-gray-300 rounded mt-1 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1" name="kelamin" id="kelamin">
-            <option value="L">Laki-Laki</option>
-            <option value="P">Perempuan</option>
-          </select>
-        </div>
-        <div class="detail_profile">
-          <label for="role_id">Jenis Kelamin</label>
-          <select class=" justify-self-start p-2 border border-gray-300 rounded mt-1 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1" name="kelamin" id="kelamin">
-            <option value="1">Admin</option>
-            <option value="2">User</option>
-          </select>
+        <div class="flex">
+          <div class="justify-between font-bold flex flex-col w-1/4">
+            <label for="nama">Nama</label>
+            <label for="ktp">NIK</label>
+            <label for="alamat">Alamat</label>
+            <label for="no_hp">No Hp</label>
+            <label for="email">Email</label>
+            <label for="tgl_lahir">Tanggal Lahir</label>
+            <label for="kelamin">Jenis Kelamin</label>
+            <label for="role_id">access</label>
+          </div>
+          <div class=" flex flex-col w-3/4">
+            <input class="p-2 border border-gray-300 rounded mt-1 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1" name="nama" type="text" placeholder="Nama Lengkap">
+            <input class="p-2 border border-gray-300 rounded mt-1 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1" name="ktp" type="number" placeholder="NO KTP">
+            <input class="p-2 border border-gray-300 rounded mt-1 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1" name="alamat" type="text" placeholder="Alamat Lengkap">
+            <input class="p-2 border border-gray-300 rounded mt-1 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1" name="no_hp" type="number" placeholder="081123123123">
+            <input class="p-2 border border-gray-300 rounded mt-1 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1" name="email" type="text" placeholder="test@xyz.com">
+            <input class="p-2 border border-gray-300 rounded mt-1 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1" name="tgl_lahir" type="date">
+            <select class="p-2 border border-gray-300 rounded mt-1 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1" name="kelamin" id="kelamin">
+              <option value="L">Laki-Laki</option>
+              <option value="P">Perempuan</option>
+            </select>
+            <select class=" justify-self-start p-2 border border-gray-300 rounded mt-1 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1" name="role_id" id="role_id">
+              <option value="1">Admin</option>
+              <option value="2">User</option>
+            </select>
+          </div>
         </div>
       </div>
       <div class="mt-3">
