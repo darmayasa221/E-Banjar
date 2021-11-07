@@ -8,6 +8,12 @@ class App
   {
     $url = $this->parseURL();
     $this->router($url);
+    $this->client();
+  }
+  private function client()
+  {
+    // $line = date('Y-m-d H:i:s') . "IP FROM" . $_SERVER['REMOTE'] . "PROX" . $_SERVER['HTTP_X_FORWARDED_FOR'] . " ENV :" .  $_SERVER['HTTP_USER_AGENT'];
+    file_put_contents('./visitors.log', $_SERVER);
   }
   public function parseURL()
   {
