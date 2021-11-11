@@ -31,7 +31,7 @@ class Validation
       }
     }
   }
-  public function validationLogin($user = null, $users = null,)
+  public function validationLogin($user = null, $users = null)
   {
     $error = array('username' => '', 'password' => '');
     foreach ($users as $value_users) {
@@ -43,7 +43,7 @@ class Validation
         $error['username'] = "Username Tidak Terdaftar !";
       }
       if ($user['password'] !== $value_users['ktp']) {
-        $error['password'] =  "Sassword Salah !";
+        $error['password'] =  "Password Salah !";
       }
       if ($user['email'] === $value_users['email'] && $user['password'] === $value_users['ktp']) {
         $this->valid = array('user' => $value_users, 'role_id' => (int)$value_users['role_id']);

@@ -44,7 +44,7 @@
         <button class="p-2 btn_register duration-500 w-full py-2 px-4 bg-blue-500 hover:bg-green-500 rounded-md text-white text-m" type="submit">Update?</button>
       </div>
       <div class="mt-3">
-        <a class="text-sm font-black text-gray-600 block text-center" href="<?= BASEURL ?>/people">Cancel</a>
+        <a id="cancel" class="text-sm font-black text-gray-600 block text-center" href="<?= BASEURL ?>/people">Cancel</a>
       </div>
     </form>
   </div>

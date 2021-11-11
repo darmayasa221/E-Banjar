@@ -16,7 +16,7 @@
           <div class="card_activity <?= $key ?>">
             <img src="<?= BASEURL ?>/img/src/<?= $value['foto_kegiatan'] ?>" alt="<?= $value['foto_kegiatan'] ?>">
             <p><?= ($value['nama_kegiatan']) ?></p>
-            <a class="w-1/2 duration-300 bg-blue-500 hover:bg-green-500 rounded-md text-white text-m" href="<?= BASEURL ?>/activitys/activity/<?= $value['nama_kegiatan'] ?>/<?= $value['id'] ?>">Lihat</a>
+            <a id="lihat" class="w-1/2 duration-300 bg-blue-500 hover:bg-green-500 rounded-md text-white text-m" href="<?= BASEURL ?>/activitys/activity/<?= $value['nama_kegiatan'] ?>/<?= $value['id'] ?>">Lihat</a>
           </div>
         <?php endforeach; ?>
       </div>

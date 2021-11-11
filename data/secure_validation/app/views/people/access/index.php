@@ -33,8 +33,8 @@
               <td class=" border-r-2 border-fuchsia-600 w-1/5"><?= $value['alamat'] ?></td>
               <td class=" text-center border-r-2 border-fuchsia-600 w-1/12">
                 <div class="flex flex-col items-center justify-center h-full">
-                  <button class=" m-2 w-full duration-300 bg-blue-500 hover:bg-green-500 rounded-md text-white text-m" onclick="location.href='<?= BASEURL ?>/people/people/<?= $value['ktp'] ?>/<?= $value['nama'] ?>';">Edit</button>
-                  <button class=" m-2 w-full duration-300 bg-blue-500 hover:bg-red-500 rounded-md text-white text-m" onclick="location.href='<?= BASEURL ?>/people/toDo/remove/<?= $value['ktp'] ?>';">Delete</button>
+                  <button id="edit" class=" m-2 w-full duration-300 bg-blue-500 hover:bg-green-500 rounded-md text-white text-m" onclick="location.href='<?= BASEURL ?>/people/people/<?= $value['ktp'] ?>/<?= $value['nama'] ?>';">Edit</button>
+                  <button id="delete" class=" m-2 w-full duration-300 bg-blue-500 hover:bg-red-500 rounded-md text-white text-m" onclick="location.href='<?= BASEURL ?>/people/toDo/remove/<?= $value['ktp'] ?>';">Delete</button>
                 </div>
               </td>
             </tr>

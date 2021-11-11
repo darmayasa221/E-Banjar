@@ -22,7 +22,7 @@
       <p class="p-2 border border-gray-300 rounded mt-1 duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:-translate-y-1"><?= $data['role_id'] ?></p>
     </div>
     <div class="mt-3">
-      <a class="text-sm font-black text-gray-600 block text-center" href="<?= BASEURL ?>/home">return to first pages?</a>
+      <a id="home" class="text-sm font-black text-gray-600 block text-center" href="<?= BASEURL ?>/home">return to first pages?</a>
     </div>
   </div>
 </div>

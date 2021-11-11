@@ -5,7 +5,7 @@
       <br />
       <div class="flex flex-col w-1/2">
         <div class="border-b-2 pb-3">
-          <input type="hidden" name="date_created" value="<?= $data['date_created'] ?>">
+          <!-- <input type="hidden" name="date_created" value="<?= $data['date_created'] ?>"> -->
           <input type="file" name="avatar">
         </div>
         <div class="flex">
@@ -41,7 +41,7 @@
         <button class="p-2 btn_register duration-500 w-full py-2 px-4 bg-blue-500 hover:bg-green-500 rounded-md text-white text-m" type="submit">Save?</button>
       </div>
       <div class="mt-3">
-        <a class="text-sm font-black text-gray-600 block text-center" href="<?= BASEURL ?>/people/peoples">Cancel</a>
+        <a id="cancel" class="text-sm font-black text-gray-600 block text-center" href="<?= BASEURL ?>/people/peoples">Cancel</a>
       </div>
     </form>
   </div>

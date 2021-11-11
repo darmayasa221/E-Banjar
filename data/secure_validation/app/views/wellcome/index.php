@@ -1,7 +1,7 @@
 <div class="main_wraper ">
   <nav class="navbar_container">
     <div class="navbar font-bold">
-      <a href="<?= BASEURL ?>/auth">
+      <a id="login" href="<?= BASEURL ?>/auth">
         Login
       </a>
     </div>
