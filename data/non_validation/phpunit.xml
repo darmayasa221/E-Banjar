@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php" colors="true">
+  <php>
+    <const name="DB_HOST" value="localhost" />
+    <const name="DB_USER" value="root" />
+    <const name="DB_PASS" value="" />
+    <const name="DB_NAME" value="db_e-banjar" />
+    <const name="BASEURL" value="http://localhost/Nativ/E-Banjar/data/non_validation/public" />
+    <server name="SERVER_ADDR" value="192.168.1.1" />
+    <server name="HTTP_USER_AGENT" value="chrome/unit/test" />
+  </php>
+  <testsuites>
+    <testsuite name="E-Banjar Secure Validation">
+      <directory>
+        tests
+      </directory>
+    </testsuite>
+  </testsuites>
+</phpunit>

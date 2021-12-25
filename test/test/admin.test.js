@@ -1,24 +1,30 @@
 require("chromedriver");
 const { Builder, By, Key } = require("selenium-webdriver");
 const assert = require("assert");
-
 let url = {
   "secure validation":
-    "http://localhost:8888/E-Banjar/data/secure_validation/public/wellcome",
+    "http://localhost/Nativ/E-Banjar/data/secure_validation/public/wellcome",
   "non secure":
-    "http://localhost:8888/E-Banjar/data/no_validation/public/wellcome",
+    "http://localhost/Nativ/E-Banjar/data/non_validation/public/wellcome",
 };
+//mac os
+// let url = {
+//   "secure validation":
+//     "http://localhost:8888/E-Banjar/data/secure_validation/public/wellcome",
+//   "non secure":
+//     "http://localhost:8888/E-Banjar/data/no_validation/public/wellcome",
+// };
 let driver = new Builder().forBrowser("chrome").build();
-driver.get(url["secure validation"]);
+driver.get(url["non secure"]);
 
-describe("E-banjar admin", () => {
-  it("search activity", async () => {
-    await driver.findElement(By.id("keyword")).sendKeys("update", Key.RETURN);
+describe("E-banjar Admin", () => {
+  it("Melakukan Pencarian Kegiatan", async () => {
+    await driver.findElement(By.id("keyword")).sendKeys("ayo maju", Key.RETURN);
   });
-  it("go to login Page", async () => {
+  it("Mencoba Button Login", async () => {
     await driver.findElement(By.id("login")).click();
   });
-  it("if you not fill form login", async () => {
+  it("Login Dengan Username dan Password Kosong", async () => {
     await driver
       .findElement(By.xpath("/html/body/div/div[2]/form/div[3]/button"))
       .click();
@@ -30,41 +36,41 @@ describe("E-banjar admin", () => {
       .findElement(By.id("err_password"))
       .getText()
       .then((value) => value);
-    assert.strictEqual(error_usrname, "Username Tidak Terdaftar !");
+    assert.strictEqual(error_usrname, "Username Kosong !");
     assert.strictEqual(error_password, "Password Salah !");
   });
-  it("login using admin account", async () => {
+  it("Login Menggunakan User Sebagai Admin", async () => {
     await driver.findElement(By.id("email")).sendKeys("admin@admin.com");
     await driver.findElement(By.id("password")).sendKeys("1111111111111111");
     await driver
       .findElement(By.xpath("/html/body/div/div[2]/form/div[3]/button"))
       .click();
   });
-  it("go to profile page and back to home admin", async () => {
+  it("Menekan Button Profile dan Menekan Button Cancel", async () => {
     await driver.findElement(By.id("profile")).click();
     await driver.findElement(By.id("home")).click();
   });
-  it("go to kegiatan masyarakat page", async () => {
+  it("Menekan Button Kegiatan Masyarakat", async () => {
     await driver.findElement(By.id("kegiatan_masyarakat")).click();
   });
-  it("search kegiatan masyarakat", async () => {
-    await driver.findElement(By.id("keyword")).sendKeys("update1", Key.ENTER);
+  it("Mencari Kegiatan Masyarakat", async () => {
+    await driver.findElement(By.id("keyword")).sendKeys("ayo maju", Key.ENTER);
     await driver.findElement(By.id("keyword")).sendKeys("", Key.ENTER);
   });
-  it("delete kegiatan masyarakat", async () => {
+  it("Delete Kegiatan Masyarakat", async () => {
     await driver.findElement(By.id("delete")).click();
   });
-  it("go to update kegiatan masyarakat page", async () => {
+  it("Menekan Button Edit Kegiatan Masyarakat", async () => {
     await driver.findElement(By.id("edit")).click();
     let headText = await driver
       .findElement(By.xpath("/html/body/div/main/div[2]/div/form/h1"))
       .getText((value) => value);
     assert.strictEqual(headText, "Update Kegiatan");
   });
-  it("update kegiatan masyarakat", async () => {
+  it("Melakukan Update kegiatan Masyarakat", async () => {
     await driver
       .findElement(By.name("foto_kegiatan"))
-      .sendKeys("/img/kegiatan_default.jpeg");
+      .sendKeys("D:/DEV/Nativ/E-Banjar/test/test/img/kegiatan_default.jpeg");
     await driver
       .findElement(By.name("nama_kegiatan"))
       .sendKeys("Kegiatan Pendakian Gunung");
@@ -75,11 +81,11 @@ describe("E-banjar admin", () => {
       )
       .click();
   });
-  it("cancel update kegiatan", async () => {
+  it("Membatalkan Update Kegiatan Masyarakat", async () => {
     await driver.findElement(By.id("edit")).click();
     await driver.findElement(By.id("cancel")).click();
   });
-  it("go to add kegiatan masyarakat", async () => {
+  it("Menekan Button Tambah Kegiatan Masyrakat", async () => {
     await driver.findElement(By.id("tambah_kegiatan")).click();
     let headText = await driver
       .findElement(By.xpath("/html/body/div/main/div[2]/div/form/h1"))
@@ -87,12 +93,10 @@ describe("E-banjar admin", () => {
       .then((value) => value);
     assert.strictEqual(headText, "Masukkan Kegiatan");
   });
-  it("tambah kegiatan", async () => {
+  it("Tambah Kegiatan", async () => {
     await driver
       .findElement(By.name("foto_kegiatan"))
-      .sendKeys(
-        "/Users/darmayasa/Documents/programer/MVC/E-Banjar/test/test/img/kegiatan_default.jpeg"
-      );
+      .sendKeys("D:/DEV/Nativ/E-Banjar/test/test/img/kegiatan_default.jpeg");
     await driver
       .findElement(By.name("nama_kegiatan"))
       .sendKeys("Kegiatan Pendakian Gunung");
@@ -103,22 +107,22 @@ describe("E-banjar admin", () => {
       )
       .click();
   });
-  it("cancel tambah kegiatan", async () => {
+  it("Cancel Update Kegiatan", async () => {
     await driver.findElement(By.id("tambah_kegiatan")).click();
     await driver.findElement(By.id("cancel")).click();
   });
   //
-  it("go to pencarian masyarakat page", async () => {
+  it("Menekan Button Pencarian Masyarakat", async () => {
     await driver.findElement(By.id("pencarian_masyarakat")).click();
   });
-  it("search masyarakat", async () => {
+  it("Melakukan Pencarian Masyarakat", async () => {
     await driver.findElement(By.id("keyword")).sendKeys("admin", Key.ENTER);
     await driver.findElement(By.id("keyword")).sendKeys("", Key.ENTER);
   });
-  it("delete masyarakat", async () => {
+  it("Menekan Button Hapus  Masyarakat", async () => {
     await driver.findElement(By.id("delete")).click();
   });
-  it("go to update masyarakat page", async () => {
+  it("Menekan Button Edit Masyarakat", async () => {
     await driver.findElement(By.id("edit")).click();
     let headText = await driver
       .findElement(By.xpath("/html/body/div/main/div[2]/div/form/h1"))
@@ -126,13 +130,12 @@ describe("E-banjar admin", () => {
       .then((value) => value);
     assert.strictEqual(headText, "Update Data Masyarakat");
   });
-  it("update masyarakat", async () => {
+  it("Melakuakn Update Masyarakat", async () => {
     await driver
       .findElement(By.name("avatar"))
-      .sendKeys(
-        "/Users/darmayasa/Documents/programer/MVC/E-Banjar/test/test/img/default.png"
-      );
-    await driver.findElement(By.name("ktp")).sendKeys("2221111111111111");
+      .sendKeys("D:/DEV/Nativ/E-Banjar/test/test/img/default.png");
+
+    await driver.findElement(By.name("ktp")).sendKeys("2221141111111111");
     await driver.findElement(By.name("nama")).sendKeys("jhoni indrawan");
     await driver.findElement(By.name("alamat")).sendKeys("br.tamansari");
     await driver.findElement(By.name("email")).sendKeys("user3@user.com");
@@ -146,11 +149,10 @@ describe("E-banjar admin", () => {
       )
       .click();
   });
-  it("cancel update kegiatan masyarakat", async () => {
-    await driver.findElement(By.id("edit")).click();
+  it("Cancel Update Masyrakat", async () => {
     await driver.findElement(By.id("cancel")).click();
   });
-  it("go to add masyarakat", async () => {
+  it("Menekan Button Tambah Data Masyarakat", async () => {
     await driver.findElement(By.id("tambah_masyarakat")).click();
     let headText = await driver
       .findElement(By.xpath("/html/body/div/main/div[2]/div/form/h1"))
@@ -158,13 +160,11 @@ describe("E-banjar admin", () => {
       .then((value) => value);
     assert.strictEqual(headText, "Tambah Masyarakat");
   });
-  it("tambah Masyarakat", async () => {
+  it("Menambah Data Masyrakat", async () => {
     await driver
       .findElement(By.name("avatar"))
-      .sendKeys(
-        "/Users/darmayasa/Documents/programer/MVC/E-Banjar/test/test/img/default.png"
-      );
-    await driver.findElement(By.name("ktp")).sendKeys("2221111111111111");
+      .sendKeys("D:/DEV/Nativ/E-Banjar/test/test/img/default.png");
+    await driver.findElement(By.name("ktp")).sendKeys("2221111111411131");
     await driver.findElement(By.name("nama")).sendKeys("jhoni");
     await driver.findElement(By.name("alamat")).sendKeys("br.tamansari");
     await driver.findElement(By.name("email")).sendKeys("user3@user.com");
@@ -178,8 +178,12 @@ describe("E-banjar admin", () => {
       )
       .click();
   });
-  it("cancel tambah masyarakat", async () => {
+  it("Cancel Tambah data Masyrakat", async () => {
     await driver.findElement(By.id("tambah_masyarakat")).click();
     await driver.findElement(By.id("cancel")).click();
+  });
+  it("Menekan Button Logout", async () => {
+    await driver.findElement(By.id("logout")).click();
+    await driver.close()
   });
 });

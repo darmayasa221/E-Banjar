@@ -19,10 +19,11 @@ class Activitys extends Controller
     if ($this->user['login'] === true) {
       if ($this->user['access'] === 'admin') {
         if ($action == 'search') {
-          $data = $this->to_do->searchKegiatan();
+          $input = $this->validation()->secureValidation($_GET['keyword']);
+          $data = $this->to_do->searchKegiatan($input);
           $this->view('templates/headers/access/header-access', $this->user['user']);
           $this->view('templates/menu/side-left-menu-admin');
-          $this->view('activitys/access/index', $data);
+          $this->view('activitys/access/index', $data, $input);
           $this->view('templates/footers/access/footer-access');
         } else {
           $this->view('templates/headers/access/header-access', $this->user['user']);
@@ -32,10 +33,11 @@ class Activitys extends Controller
         }
       } else {
         if ($action === 'search') {
-          $data = $this->to_do->searchKegiatan();
+          $input = $this->validation()->secureValidation($_GET['keyword']);
+          $data = $this->to_do->searchKegiatan($input);
           $this->view('templates/headers/access/header-access', $this->user['user']);
           $this->view('templates/menu/side-left-menu-user');
-          $this->view('activitys/index', $data);
+          $this->view('activitys/index', $data, $input);
           $this->view('templates/footers/access/footer-access');
         } else {
           $this->view('templates/headers/access/header-access', $this->user['user']);
@@ -51,7 +53,6 @@ class Activitys extends Controller
 
   public function activity($kegiatan = null, $id = null)
   {
-
     if ($this->user['login'] === true) {
       if ($this->user['access'] === 'admin') {
         if (!isset($kegiatan) && !isset($id)) {
@@ -101,26 +102,30 @@ class Activitys extends Controller
         switch ($action) {
           case ($action === 'update'):
             if (!$_FILES['foto_kegiatan']["size"] === 0) {
-              $this->updateData = $this->validation()->isvalid($_FILES, $_POST);
+              $post_valid = $this->validation()->secureValidation($_POST);
+              $this->updateData = $this->validation()->isvalid($_FILES, $post_valid);
               if ($this->to_do->updateKegiatan($this->updateData) > 0) {
                 header('Location: ' . BASEURL . '/activitys');
               };
               exit;
             } else {
-              $this->updateData = $this->validation()->isvalid(null, $_POST);
+              $post_valid = $this->validation()->secureValidation($_POST);
+              $this->updateData = $this->validation()->isvalid(null, $post_valid);
               if ($this->to_do->updateKegiatan($this->updateData) > 0) {
                 header('Location: ' . BASEURL . '/activitys');
               };
               exit;
             };
           case ($action === 'add'):
-            $data = $this->validation()->isvalid($_FILES, $_POST);
+            $post_valid = $this->validation()->secureValidation($_POST);
+            $data = $this->validation()->isvalid($_FILES, $post_valid);
             if ($this->to_do->addKegiatan($data) > 0) {
               header('Location: ' . BASEURL . '/activitys');
             };
             exit;
           case ($action === 'remove'):
-            if ($this->to_do->removeKegiatan($id) > 0) {
+            $id_valid = $this->validation()->secureValidation($id);
+            if ($this->to_do->removeKegiatan($id_valid) > 0) {
               header('Location: ' . BASEURL . '/activitys');
             };
           default:

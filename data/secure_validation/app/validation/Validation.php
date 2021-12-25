@@ -4,6 +4,57 @@ class Validation
   private $isUser = false;
   private $newData = [];
   private $valid;
+  private $tabel_log = 'log';
+  private $tabel_masyarakat = 'tb_data_masyarakat';
+  private $db;
+  public function __construct()
+  {
+    $this->db = new Databases;
+  }
+  public function addLog()
+  {
+    $msg_log = date('Y-m-d H:i:s') . " IP FROM :" . $_SERVER['SERVER_ADDR']  . " ENV : " .  $_SERVER['HTTP_USER_AGENT'];
+    $query = "INSERT INTO {$this->tabel} VALUES 
+      (null, :log)";
+    $this->db->query($query);
+    $this->db->bind('log', $msg_log);
+    $this->db->execute();
+    return $this->db->rowCount();
+  }
+  public function secureValidation($data)
+  {
+    $newData = $data;
+    $log_count = 0;
+    $regex = '/[\`\~\@\#\$\%\^\&\*\(\)\_\-\+\=\\\|\}\]\{\[\:\;\"\'\<\>\?\/\.\,].*?[\`\~\@\#\$\%\^\&\*\(\)\_\-\+\=\\\|\}\]\{\[\:\;\"\'\<\>\?\/\.\,]|\`|\~|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\-|\+|\=|\\|\||\}|\]|\{|\[|\:|\;|\"|\'|\<|\>|\?|\/|\.|\,/i';
+    $match_array = [];
+    $match = 0;
+    if (is_array($data)) {
+      foreach ($data as $key => $value) {
+        $count = preg_match($regex, $value);
+        if ($count > 0) {
+          $match_array[$key] = $count;
+        }
+      }
+    } else {
+      $match = preg_match($regex, $data);
+    }
+    if (count($match_array) > 0) {
+      foreach ($match_array as $key => $value) {
+        if ($key === 'email' || $key === 'tgl_lahir') {
+          $newData[$key] = $data[$key];
+        } else {
+          $newValue = preg_replace($regex, '', $newData[$key]);
+          $newData[$key] = $newValue;
+          $log_count = $log_count + $this->addLog();
+        }
+      }
+    } else if ($match > 0) {
+      $newValue = preg_replace($regex, '', $newData);
+      $newData = $newValue;
+      $log_count = $log_count + $this->addLog();
+    }
+    return [$newData, $log_count];
+  }
 
   public function validSesion($data)
   {
@@ -31,31 +82,49 @@ class Validation
       }
     }
   }
-  public function validationLogin($user = null, $users = null)
+
+  public function validationLogin($user = null)
   {
-    $error = array('username' => '', 'password' => '');
-    foreach ($users as $value_users) {
-      if ($user['email'] === '' &&  $user['password'] === '') {
-        $error['password'] = "Password Kosong !";
-        $error['username'] = "Username Kosong !";
+    $query = "SELECT * FROM {$this->tabel_masyarakat} WHERE ktp = :ktp";
+    $this->db->query($query);
+    $this->db->bind('ktp', $user[0]['username']);
+    $result = $this->db->single();
+    $row = $this->db->rowCount();
+    if ($row === 1) {
+      if ($result['ktp'] === $user[0]['password']) {
+        return $result;
+      } else {
+        return null;
       }
-      if ($user['email'] !== $value_users['email']) {
-        $error['username'] = "Username Tidak Terdaftar !";
-      }
-      if ($user['password'] !== $value_users['ktp']) {
-        $error['password'] =  "Password Salah !";
-      }
-      if ($user['email'] === $value_users['email'] && $user['password'] === $value_users['ktp']) {
-        $this->valid = array('user' => $value_users, 'role_id' => (int)$value_users['role_id']);
-        $this->isUser = true;
-      }
-    }
-    if ($this->isUser == true) {
-      return $this->valid;
     } else {
-      return $error;
+      return null;
     }
+
+    // $error = array('username' => '', 'password' => '');
+    // foreach ($users as $value_users) {
+    //   if ($user['email'] === '' &&  $user['password'] === '') {
+    //     $error['password'] = "Password Kosong !";
+    //     $error['username'] = "Username Kosong !";
+    //   } else if ($user['email'] !== $value_users['email']) {
+    //     $error['username'] = "Username Tidak Terdaftar !";
+    //   } else if ($user['email'] === $value_users['email']) {
+    //     $error['username'] = "";
+    //   }
+    //   if ($user['password'] !== $value_users['ktp']) {
+    //     $error['password'] =  "Password Salah !";
+    //   }
+    //   if ($user['email'] === $value_users['email'] && $user['password'] === $value_users['ktp']) {
+    //     $this->valid = array('user' => $value_users, 'role_id' => (int)$value_users['role_id']);
+    //     $this->isUser = true;
+    //   }
+    // }
+    // if ($this->isUser == true) {
+    //   return $this->valid;
+    // } else {
+    //   return $error;
+    // }
   }
+
   private function validationInput($array)
   {
     foreach ($array as $key =>  $value) {
@@ -74,6 +143,7 @@ class Validation
     }
     return $this->newData;
   }
+
   private function validationFile($array)
   {
     $file_type = ['jpg', 'jpeg', 'png'];
@@ -114,6 +184,7 @@ class Validation
       }
     }
   }
+
   public function isvalid($file = null, $data)
   {
     $input_data =  $this->validationInput($data);

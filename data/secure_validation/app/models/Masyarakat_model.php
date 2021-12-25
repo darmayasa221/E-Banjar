@@ -4,7 +4,6 @@ class Masyarakat_model
 {
   private $tabel = 'tb_data_masyarakat';
   private $db;
-  private $keyword;
   public function __construct()
   {
     $this->db = new Databases;
@@ -84,16 +83,11 @@ class Masyarakat_model
     $this->db->execute();
     return $this->db->rowCount();
   }
-  public function searchMasyarakat()
+  public function searchMasyarakat($data)
   {
-    if (isset($_POST['keyword'])) {
-      $this->keyword = $_POST['keyword'];
-    } else {
-      $this->keyword = $_GET['keyword'];
-    }
     $query = "SELECT * FROM {$this->tabel} WHERE nama LIKE :keyword";
     $this->db->query($query);
-    $this->db->bind('keyword', "%$this->keyword%");
+    $this->db->bind('keyword', "%$data%");
     return $this->db->resultSet();
   }
 }

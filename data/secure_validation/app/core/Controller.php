@@ -1,7 +1,7 @@
 <?php
 class Controller
 {
-  public function view($view, $data = [], $headline = '')
+  public function view($view, $data = [], $param = null)
   {
     require_once '../app/views/' . $view . '.php';
   }
@@ -13,7 +13,11 @@ class Controller
   public function sesion()
   {
     session_start();
-    return $_SESSION;
+    if (count($_SESSION) === 0) {
+      return $_SESSION = array('access' => '', 'login' => false, 'user' => '');
+    } else {
+      return $_SESSION;
+    }
   }
   public function validation()
   {

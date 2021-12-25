@@ -1,0 +1,18 @@
+{
+  "name": "darma/non_validation",
+  "description": "unit test for non secure validation",
+  "authors": [
+    {
+      "name": "Darma Yasa",
+      "email": "darmayasa221@gmail.com"
+    }
+  ],
+  "autoload": {
+    "classmap": [
+      "app/*"
+    ]
+  },
+  "require-dev": {
+    "phpunit/phpunit": "9.5"
+  }
+}

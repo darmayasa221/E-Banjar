@@ -1,7 +1,7 @@
 <div class="right-side">
   <div class="conten justify-center">
     <form class="flex flex-col items-center" action=" <?= BASEURL ?>/people/toDo/update" method="POST" enctype="multipart/form-data">
-      <h1 class="text-5xl font-bold"><?= $headline ?></h1>
+      <h1 class="text-5xl font-bold"><?= $param ?></h1>
       <br />
       <div class="flex flex-col w-1/2">
         <div class="border-b-2 pb-3">

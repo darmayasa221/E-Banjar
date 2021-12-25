@@ -1,11 +1,11 @@
 <?php
 class Profile extends Controller
 {
-  private $all_data;
-  public function __construct()
-  {
-    $this->all_data = $this->model('Masyarakat_model')->getAllUser();
-  }
+  // private $all_data;
+  // public function __construct()
+  // {
+  //   $this->all_data = $this->model('Masyarakat_model')->getAllUser();
+  // }
   public function index()
   {
     $user['login'] = false;
@@ -17,7 +17,6 @@ class Profile extends Controller
         $this->view('profile/access/index', $user['user']);
         $this->view('templates/footers/access/footer-access');
       } else {
-        // var_dump($user);
         $this->view('templates/headers/access/header-access', $user['user']);
         $this->view('templates/menu/side-left-menu-user');
         $this->view('profile/index', $user['user']);

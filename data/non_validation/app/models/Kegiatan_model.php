@@ -4,7 +4,6 @@
   {
     private $tabel = 'tb_kegiatan_masyarakat';
     private $db;
-    private $keyword;
     public function __construct()
     {
       $this->db = new Databases;
@@ -58,17 +57,12 @@
 
       return $this->db->rowCount();
     }
-    public function searchKegiatan()
+    public function searchKegiatan($data)
 
     {
-      if (isset($_POST['keyword'])) {
-        $this->keyword = $_POST['keyword'];
-      } else {
-        $this->keyword = $_GET['keyword'];
-      }
       $query = "SELECT * FROM {$this->tabel} WHERE nama_kegiatan LIKE :keyword";
       $this->db->query($query);
-      $this->db->bind('keyword', "%$this->keyword%");
+      $this->db->bind('keyword', "%$data%");
       return $this->db->resultSet();
     }
   }

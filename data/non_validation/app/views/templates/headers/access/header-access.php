@@ -14,7 +14,7 @@
   <div class="main_wraper ">
     <nav class="navbar_container">
       <div class="navbar font-bold">
-        <a href="<?= BASEURL ?>/auth/logout">
+        <a id="logout" href="<?= BASEURL ?>/auth/logout">
           Logout
         </a>
       </div>

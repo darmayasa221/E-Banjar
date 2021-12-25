@@ -17,10 +17,11 @@ class People extends Controller
     if ($this->user['login'] == true) {
       if ($this->user['access'] == 'admin') {
         if ($action == 'search') {
-          $data = $this->to_do->searchMasyarakat();
+          $input = $this->validation()->secureValidation($_GET['keyword']);
+          $data = $this->to_do->searchMasyarakat($input);
           $this->view('templates/headers/access/header-access', $this->user['user']);
           $this->view('templates/menu/side-left-menu-admin');
-          $this->view('people/access/index', $data);
+          $this->view('people/access/index', $data, $input);
           $this->view('templates/footers/access/footer-access');
         } else {
           $this->view('templates/headers/access/header-access', $this->user['user']);
@@ -30,10 +31,11 @@ class People extends Controller
         }
       } else {
         if ($action == 'search') {
-          $data = $this->to_do->searchMasyarakat();
+          $input = $this->validation()->secureValidation($_GET['keyword']);
+          $data = $this->to_do->searchMasyarakat($input);
           $this->view('templates/headers/access/header-access', $this->user['user']);
           $this->view('templates/menu/side-left-menu-user');
-          $this->view('people/index', $data);
+          $this->view('people/index', $data, $input);
           $this->view('templates/footers/access/footer-access');
         } else {
           $this->view('templates/headers/access/header-access', $this->user['user']);
@@ -76,14 +78,16 @@ class People extends Controller
         switch ($action) {
           case ($action === 'update'):
             if (!$_FILES['avatar']["size"] == 0) {
-              $this->updateData = $this->validation()->isvalid($_FILES, $_POST);
+              $post_valid = $this->validation()->secureValidation($_POST);
+              $this->updateData = $this->validation()->isvalid($_FILES, $post_valid);
               $this->validation()->validSesion($this->updateData);
               if ($this->to_do->updateMasyarakat($this->updateData) > 0) {
                 header('Location: ' . BASEURL . '/people');
               };
               exit;
             } else {
-              $this->updateData = $this->validation()->isvalid(null, $_POST);
+              $post_valid = $this->validation()->secureValidation($_POST);
+              $this->updateData = $this->validation()->isvalid(null, $post_valid);
               $this->validation()->validSesion($this->updateData);
               if ($this->to_do->updateMasyarakat($this->updateData) > 0) {
                 header('Location: ' . BASEURL . '/people');
@@ -91,7 +95,8 @@ class People extends Controller
               exit;
             }
           case ($action === 'add'):
-            $data = $this->validation()->isvalid($_FILES, $_POST);
+            $post_valid = $this->validation()->secureValidation($_POST);
+            $data = $this->validation()->isvalid($_FILES, $post_valid);
             if ($this->to_do->addMasyarakat($data) > 0) {
               header('Location: ' . BASEURL . '/people');
               exit;
@@ -107,14 +112,16 @@ class People extends Controller
         switch ($action) {
           case ($action === 'update'):
             if (!$_FILES['avatar']["size"] === 0) {
-              $this->updateData = $this->validation()->isvalid($_FILES, $_POST);
+              $post_valid = $this->validation()->secureValidation($_POST);
+              $this->updateData = $this->validation()->isvalid($_FILES, $post_valid);
               if ($this->to_do->updateMasyarakat($this->updateData) > 0) {
                 $this->validation()->validSesion($this->updateData);
                 header('Location: ' . BASEURL . '/profile');
               };
               exit;
             } else {
-              $this->updateData = $this->validation()->isvalid(null, $_POST);
+              $post_valid = $this->validation()->secureValidation($_POST);
+              $this->updateData = $this->validation()->isvalid(null, $post_valid);
               if ($this->to_do->updateMasyarakat($this->updateData) > 0) {
                 $this->validation()->validSesion($this->updateData);
                 header('Location: ' . BASEURL . '/profile');

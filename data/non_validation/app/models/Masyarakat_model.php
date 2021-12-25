@@ -4,7 +4,6 @@ class Masyarakat_model
 {
   private $tabel = 'tb_data_masyarakat';
   private $db;
-  private $keyword;
   public function __construct()
   {
     $this->db = new Databases;
@@ -30,9 +29,10 @@ class Masyarakat_model
   }
   public function addMasyarakat($data)
   {
+    var_dump($data);
     $query = "INSERT INTO {$this->tabel} VALUES 
       (:ktp, :nama, :alamat, :kelamin, :tgl_lahir, :no_hp, :email, :avatar, :role_id, :date_created)";
-    $date_created =  date("y-m-d h:i:s", strtotime($data['date_created']));
+    $date_created =  date("y-m-d h:i:s");
     $date = date("y-m-d", strtotime($data['tgl_lahir']));
     $generet_ktp = gmp_init($data['ktp']);
     $generet_no_hp = gmp_init($data['no_hp']);
@@ -83,16 +83,11 @@ class Masyarakat_model
     $this->db->execute();
     return $this->db->rowCount();
   }
-  public function searchMasyarakat()
+  public function searchMasyarakat($data)
   {
-    if (isset($_POST['keyword'])) {
-      $this->keyword = $_POST['keyword'];
-    } else {
-      $this->keyword = $_GET['keyword'];
-    }
     $query = "SELECT * FROM {$this->tabel} WHERE nama LIKE :keyword";
     $this->db->query($query);
-    $this->db->bind('keyword', "%$this->keyword%");
+    $this->db->bind('keyword', "%$data%");
     return $this->db->resultSet();
   }
 }

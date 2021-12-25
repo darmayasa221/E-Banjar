@@ -6,15 +6,15 @@ class Auth extends Controller
   {
     $this->access = $this->model('Masyarakat_model')->access();
   }
-  public function index($error = null)
+  public function index($error = null, $user = null)
   {
     $this->view('templates/headers/header');
-    $this->view('login/index', $error);
+    $this->view('login/index', $error, $user);
     $this->view('templates/footers/footer');
   }
   public function Login()
   {
-    $user = $_POST;
+    count($_POST) > 0 ? $user = $_POST : $user = array('email' => '', 'password' => '');
     $users = $this->model('Masyarakat_model')->getAllUser();
     $valid = $this->validation()->validationLogin($user, $users);
     if ((int)$valid && isset($valid['role_id'])) {
@@ -37,7 +37,7 @@ class Auth extends Controller
       }
     } else {
       $error_msg = $valid;
-      $this->index($error_msg);
+      $this->index($error_msg, $user);
     }
   }
   public function Logout()

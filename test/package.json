@@ -1,0 +1,18 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "test web E-banjar",
+  "main": "index.js",
+  "scripts": {
+    "test-admin": "mocha --no-timeouts --reporter mochawesome test/admin.test.js",
+    "test-user": "mocha --no-timeouts --reporter mochawesome --require mochawesome/register test/user.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chromedriver": "^95.0.0",
+    "mocha": "^9.1.3",
+    "mochawesome": "^7.0.1",
+    "selenium-webdriver": "^4.0.0"
+  }
+}
