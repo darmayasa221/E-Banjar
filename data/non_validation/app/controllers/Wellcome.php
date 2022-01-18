@@ -5,10 +5,12 @@ class Wellcome extends Controller
   {
     if ($action == 'search') {
       $input = $this->validation()->secureValidation($_GET['keyword']);
-      $data = $this->model('Kegiatan_model')->searchKegiatan($input);
-      $this->view('templates/headers/header');
-      $this->view('wellcome/index', $data, $input);
-      $this->view('templates/footers/footer');
+      $data = $this->model('Kegiatan_model')->searchKegiatan($input[0]);
+      var_dump($data);
+      var_dump($input);
+      // $this->view('templates/headers/header');
+      // $this->view('wellcome/index', $data, $input[0]);
+      // $this->view('templates/footers/footer');
     } else {
       $data = $this->model('Kegiatan_model')->getAllKegiatan();
       $this->view('templates/headers/header');

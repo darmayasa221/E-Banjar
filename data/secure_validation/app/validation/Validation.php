@@ -1,9 +1,12 @@
 <?php
+
+
 class Validation
 {
   private $isUser = false;
   private $newData = [];
   private $valid;
+  private $regex = '/[\`\~\@\#\$\%\^\&\*\(\)\_\-\+\=\\\|\}\]\{\[\:\;\"\'\<\>\?\/\.\,].*?[\`\~\@\#\$\%\^\&\*\(\)\_\-\+\=\\\|\}\]\{\[\:\;\"\'\<\>\?\/\.\,]|\`|\~|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\-|\+|\=|\\|\||\}|\]|\{|\[|\:|\;|\"|\'|\<|\>|\?|\/|\.|\,/i';
   private $tabel_log = 'log';
   private $tabel_masyarakat = 'tb_data_masyarakat';
   private $db;
@@ -14,46 +17,93 @@ class Validation
   public function addLog()
   {
     $msg_log = date('Y-m-d H:i:s') . " IP FROM :" . $_SERVER['SERVER_ADDR']  . " ENV : " .  $_SERVER['HTTP_USER_AGENT'];
-    $query = "INSERT INTO {$this->tabel} VALUES 
+    $query = "INSERT INTO {$this->tabel_log} VALUES 
       (null, :log)";
     $this->db->query($query);
     $this->db->bind('log', $msg_log);
     $this->db->execute();
     return $this->db->rowCount();
   }
-  public function secureValidation($data)
+  public function securePost($data)
   {
     $newData = $data;
-    $log_count = 0;
-    $regex = '/[\`\~\@\#\$\%\^\&\*\(\)\_\-\+\=\\\|\}\]\{\[\:\;\"\'\<\>\?\/\.\,].*?[\`\~\@\#\$\%\^\&\*\(\)\_\-\+\=\\\|\}\]\{\[\:\;\"\'\<\>\?\/\.\,]|\`|\~|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\-|\+|\=|\\|\||\}|\]|\{|\[|\:|\;|\"|\'|\<|\>|\?|\/|\.|\,/i';
     $match_array = [];
-    $match = 0;
-    if (is_array($data)) {
-      foreach ($data as $key => $value) {
-        $count = preg_match($regex, $value);
-        if ($count > 0) {
-          $match_array[$key] = $count;
-        }
+    $log_count = 0;
+    foreach ($data as $key => $value) {
+      $count = preg_match($this->regex, $value);
+      if ($count > 0) {
+        $match_array[$key] = $count;
       }
-    } else {
-      $match = preg_match($regex, $data);
     }
     if (count($match_array) > 0) {
       foreach ($match_array as $key => $value) {
         if ($key === 'email' || $key === 'tgl_lahir') {
           $newData[$key] = $data[$key];
         } else {
-          $newValue = preg_replace($regex, '', $newData[$key]);
+          $newValue = preg_replace($this->regex, '', $newData[$key]);
           $newData[$key] = $newValue;
           $log_count = $log_count + $this->addLog();
         }
       }
-    } else if ($match > 0) {
-      $newValue = preg_replace($regex, '', $newData);
-      $newData = $newValue;
-      $log_count = $log_count + $this->addLog();
+      return [$newData, $log_count];
+    } else {
+      return [$data, $log_count];
     }
-    return [$newData, $log_count];
+  }
+  public function secureGet($data)
+  {
+    $match_regex = 0;
+    $log_count = 0;
+    $match_regex = preg_match($this->regex, $data);
+    if ($match_regex > 0) {
+      $newValue = preg_replace($this->regex, '', $data);
+      $newData = $newValue;
+      $log_count = $this->addLog();
+      return [$newData, $log_count];
+    } else {
+      return [$data, $log_count];
+    }
+  }
+  public function secureValidation($data)
+  {
+    $value = [];
+    if (is_array($data)) {
+      $value = $this->securePost($data);
+    } else {
+      $value = $this->secureGet($data);
+    }
+    return $value;
+    // $newData = $data;
+    // $log_count = 0;
+    // $match_array = [];
+    // $regex = '/[\`\~\@\#\$\%\^\&\*\(\)\_\-\+\=\\\|\}\]\{\[\:\;\"\'\<\>\?\/\.\,].*?[\`\~\@\#\$\%\^\&\*\(\)\_\-\+\=\\\|\}\]\{\[\:\;\"\'\<\>\?\/\.\,]|\`|\~|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\-|\+|\=|\\|\||\}|\]|\{|\[|\:|\;|\"|\'|\<|\>|\?|\/|\.|\,/i';
+    // $match = 0;
+    // if (is_array($data)) {
+    //   foreach ($data as $key => $value) {
+    //     $count = preg_match($regex, $value);
+    //     if ($count > 0) {
+    //       $match_array[$key] = $count;
+    //     }
+    //   }
+    // } else {
+    //   $match = preg_match($regex, $data);
+    // }
+    // if (count($match_array) > 0) {
+    //   foreach ($match_array as $key => $value) {
+    //     if ($key === 'email' || $key === 'tgl_lahir') {
+    //       $newData[$key] = $data[$key];
+    //     } else {
+    //       $newValue = preg_replace($regex, '', $newData[$key]);
+    //       $newData[$key] = $newValue;
+    //       $log_count = $log_count + $this->addLog();
+    //     }
+    //   }
+    // } else if ($match > 0) {
+    //   $newValue = preg_replace($regex, '', $newData);
+    //   $newData = $newValue;
+    //   $log_count = $log_count + $this->addLog();
+    // }
+    // return [$newData, $log_count];
   }
 
   public function validSesion($data)
@@ -99,30 +149,6 @@ class Validation
     } else {
       return null;
     }
-
-    // $error = array('username' => '', 'password' => '');
-    // foreach ($users as $value_users) {
-    //   if ($user['email'] === '' &&  $user['password'] === '') {
-    //     $error['password'] = "Password Kosong !";
-    //     $error['username'] = "Username Kosong !";
-    //   } else if ($user['email'] !== $value_users['email']) {
-    //     $error['username'] = "Username Tidak Terdaftar !";
-    //   } else if ($user['email'] === $value_users['email']) {
-    //     $error['username'] = "";
-    //   }
-    //   if ($user['password'] !== $value_users['ktp']) {
-    //     $error['password'] =  "Password Salah !";
-    //   }
-    //   if ($user['email'] === $value_users['email'] && $user['password'] === $value_users['ktp']) {
-    //     $this->valid = array('user' => $value_users, 'role_id' => (int)$value_users['role_id']);
-    //     $this->isUser = true;
-    //   }
-    // }
-    // if ($this->isUser == true) {
-    //   return $this->valid;
-    // } else {
-    //   return $error;
-    // }
   }
 
   private function validationInput($array)

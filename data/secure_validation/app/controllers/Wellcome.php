@@ -5,9 +5,9 @@ class Wellcome extends Controller
   {
     if ($action == 'search') {
       $input = $this->validation()->secureValidation($_GET['keyword']);
-      $data = $this->model('Kegiatan_model')->searchKegiatan($input);
+      $data = $this->model('Kegiatan_model')->searchKegiatan($input[0]);
       $this->view('templates/headers/header');
-      $this->view('wellcome/index', $data, $input);
+      $this->view('wellcome/index', $data, $input[0]);
       $this->view('templates/footers/footer');
     } else {
       $data = $this->model('Kegiatan_model')->getAllKegiatan();

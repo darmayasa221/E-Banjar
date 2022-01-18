@@ -3,7 +3,6 @@ class Home extends Controller
 {
   public function index()
   {
-    $user['login'] = false;
     $user = $this->sesion();
     if ($user['login'] == true) {
       if ($user['access'] == 'admin') {

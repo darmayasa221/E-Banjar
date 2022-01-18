@@ -28,19 +28,9 @@ describe("E-banjar Admin", () => {
     await driver
       .findElement(By.xpath("/html/body/div/div[2]/form/div[3]/button"))
       .click();
-    let error_usrname = await driver
-      .findElement(By.id("err_username"))
-      .getText()
-      .then((value) => value);
-    let error_password = await driver
-      .findElement(By.id("err_password"))
-      .getText()
-      .then((value) => value);
-    assert.strictEqual(error_usrname, "Username Kosong !");
-    assert.strictEqual(error_password, "Password Salah !");
   });
   it("Login Menggunakan User Sebagai Admin", async () => {
-    await driver.findElement(By.id("email")).sendKeys("admin@admin.com");
+    await driver.findElement(By.id("username")).sendKeys("1111111111111111");
     await driver.findElement(By.id("password")).sendKeys("1111111111111111");
     await driver
       .findElement(By.xpath("/html/body/div/div[2]/form/div[3]/button"))
@@ -184,6 +174,6 @@ describe("E-banjar Admin", () => {
   });
   it("Menekan Button Logout", async () => {
     await driver.findElement(By.id("logout")).click();
-    await driver.close()
+    await driver.close();
   });
 });

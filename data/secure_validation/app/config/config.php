@@ -1,6 +1,6 @@
 <?php
 //windows
-define('BASEURL', 'http://localhost/Nativ/E-Banjar/data/secure_validation/public');
+define('BASEURL', "http://{$_SERVER['SERVER_NAME']}/Nativ/E-Banjar/data/secure_validation/public");
 //mac os 
 // define('BASEURL', '/E-Banjar/data/secure_validation/public');
 

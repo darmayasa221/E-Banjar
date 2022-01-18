@@ -1,7 +1,5 @@
 <?php
-
-define('BASEURL', 'http://localhost/Nativ/E-Banjar/data/non_validation/public');
-
+define('BASEURL', "http://{$_SERVER['SERVER_NAME']}/Nativ/E-Banjar/data/non_validation/public");
 
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');

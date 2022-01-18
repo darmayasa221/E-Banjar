@@ -1,14 +1,8 @@
 <?php
 class Profile extends Controller
 {
-  // private $all_data;
-  // public function __construct()
-  // {
-  //   $this->all_data = $this->model('Masyarakat_model')->getAllUser();
-  // }
   public function index()
   {
-    $user['login'] = false;
     $user = $this->sesion();
     if ($user['login'] == true) {
       if ($user['access'] == 'admin') {

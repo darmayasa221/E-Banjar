@@ -13,7 +13,11 @@ class Controller
   public function sesion()
   {
     session_start();
-    return $_SESSION;
+    if (count($_SESSION) === 0) {
+      return $_SESSION = array('access' => '', 'login' => false, 'user' => '');
+    } else {
+      return $_SESSION;
+    }
   }
   public function validation()
   {
